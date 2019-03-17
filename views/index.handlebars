@@ -1,0 +1,46 @@
+<!-- * Setup the `index.handlebars` to have the template that Handlebars can render onto.-->
+<!-- * Create a button in `index.handlebars` that will submit the user input into the database.-->
+
+<h1 class="text-center">Burgers!</h1>
+<div class="w-50 float-left text-center">
+  <table>
+    <tr class="text-center">
+      <h3>Added Burgers</h3>
+    </tr>
+      {{#each burgers}}
+      {{#unless devoured}}
+      {{> burgers/burger-block devoured=true}}
+      {{/unless}}
+      {{/each}}
+  </table>
+</div>
+<div class="w-50 float-left text-center">
+  <table>
+    <tr class="text-center">
+      <h3>Devoured Burgers</h3>
+    </tr>
+    {{#each burgers}}
+    {{#if devoured}}
+    {{> burgers/burger-block devoured=false}}
+    {{/if}}
+    {{/each}}
+  </table> 
+</div>  
+<div class="text-center">
+  <h3>Add Burger</h3>
+  <form class="create-form">
+
+    <div class="form-group">
+      <label for="burger_name">Burger Name:</label>
+      <input type="text" id="burger_name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="devoured">Devoured Burger</label><br>
+      <input type="radio" name="devoured" value="0" checked> Leave it!<br>
+      <input type="radio" name="devoured" value="1"> Devoured it!
+    </div>
+
+    <button type="submit">Add Burger</button>
+  </form>
+</div>

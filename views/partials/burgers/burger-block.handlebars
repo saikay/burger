@@ -1,0 +1,12 @@
+<tr>
+	<td class="text-left w-30">
+		<p>{{id}} {{burger_name}}</p>
+	</td>
+	<td class="w-20">
+		{{#if devoured}}
+			<button class="change-devoured" data-id="{{id}}" data-newdevoured="{{devoured}}">
+				Devour!
+			</button>
+		{{/if}}
+	</td>
+</tr>
