@@ -4,11 +4,12 @@ $(function() {
       var id = $(this).data("id");
       
       var devourState = {
+        id: id,
         devour: 1
       };
   
       // Send the PUT request.
-      $.ajax("/api/devoured/" + id, {
+      $.ajax("/api/devoured", {
         type: "PUT",
         data: devourState
       }).then(

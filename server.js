@@ -4,6 +4,8 @@ var PORT = process.env.PORT || 8080;
 
 var app = express();
 
+const db = require("./models");
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
@@ -18,12 +20,16 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
-var routes = require("./controllers/burgers_controller.js");
+require("./routes/burger.js")(app);
 
-app.use(routes);
-
-// Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
+// Starting the server, syncing our models ------------------------------------/
+var syncOptions = { force: false };
+db.sequelize.sync(syncOptions).then(function() {
+  app.listen(PORT, function() {
+    console.log(
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      PORT,
+      PORT
+    );
+  });
 });
