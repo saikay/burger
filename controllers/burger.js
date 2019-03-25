@@ -5,10 +5,11 @@ module.exports = {
   home: function(req,res) {
     db.Burger.findAll({ raw: true })
       .then(dataModel => {
-        console.log(dataModel[0].id)
         res.render("index", {burgers:dataModel});
       })
-      .catch(err => res.status(422).json(err));
+      .catch(err => {
+        console.log(err);
+        res.status(422).json(err)});
   },
   insertOne: function(req,res) {
     console.log({burger_name:req.body.name, devoured:0});
